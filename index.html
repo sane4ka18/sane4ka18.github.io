@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sinaye1337</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="snowCanvas"></canvas>
+
+    <div class="main-wrapper">
+        <main class="glass-panel">
+            <header class="profile-header">
+                <div class="avatar-container">
+                    <img id="main-avatar" src="https://i.pinimg.com/736x/88/c3/38/88c3383a595952f144f80879e19d7d3d.jpg" alt="Sinaye">
+                </div>
+                
+                <div class="identity">
+                    <!-- Заменил иконку креста на галочку верификации, если нужно -->
+                    <h1 class="nickname">Sinaye <i class="fa-solid fa-cross verified"></i></h1>
+                    <div id="discord-status-text" class="status-text">Offline</div>
+                </div>
+
+                <div class="meta-row">
+                    <div class="meta-tag">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Ulyanovsk, RU</span>
+                    </div>
+                    <div class="meta-tag">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="clock">00:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="skills-container">
+                <span class="skill-tag">Промпт-инжиниринг</span>
+                <span class="skill-tag">Python-разработка</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">After Effects</span>
+                <span class="skill-tag">Premiere pro</span>
+            </div>
+
+            <div id="spotify-widget" class="spotify-card">
+                <div class="spot-no-music">
+                    <i class="fa-brands fa-spotify"></i> Not listening to anything
+                </div>
+            </div>
+
+            <nav class="links-list">
+                <a href="https://t.me/sinaye_o" target="_blank" class="link-card tg">
+                    <div class="link-icon"><i class="fa-brands fa-telegram"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">Telegram</span>
+                        <span class="link-sub">My Channel</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow"></i>
+                </a>
+
+                <a href="https://www.youtube.com/@sane4ka_18" target="_blank" class="link-card yt">
+                    <div class="link-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">YouTube</span>
+                        <span class="link-sub">Watch Content</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow"></i>
+                </a>
+
+                <!-- ИСПРАВЛЕНО: Убраны лишние пробелы после Discord -->
+                <button class="link-card dc" onclick="openDiscordModal()">
+                    <div class="link-icon"><i class="fa-brands fa-discord"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">Discord</span>
+                        <span class="link-sub">Press to check</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow"></i>
+                </button>
+            </nav>
+        </main>
+    </div>
+
+    <div id="discordModal" class="modal-overlay" onclick="closeDiscordModal(event)">
+        <div class="discord-card">
+            <div class="dc-banner"></div>
+            <div class="dc-content">
+                <div class="dc-header-row">
+                    <div class="dc-avatar-wrapper">
+                        <img id="dc-avatar" src="" alt="Avatar">
+                        <div id="dc-status" class="dc-status"></div>
+                    </div>
+                    <a href="https://discordapp.com/users/950633437000241175" target="_blank" class="dc-btn-profile">Open App</a>
+                </div>
+                <div class="dc-user-info">
+                    <h2 id="dc-username">Sinaye</h2>
+                    <p id="dc-tag">sinaye</p>
+                </div>
+                <div class="dc-divider"></div>
+                <div class="dc-rpc-section">
+                    <h3>DISCORD RPC</h3>
+                    <div id="rpc-content" class="rpc-box"></div>
+                </div>
+                <button class="dc-close-btn" onclick="closeDiscordModal(null, true)">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
