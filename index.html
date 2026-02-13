@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My bio :D/title>
+    <meta name="description" content="Personal bio site of Sinaye with social links, Discord status and Spotify activity.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="sinaye1337">
+    <meta property="og:description" content="Personal bio site of Sinaye: contacts, Discord and Spotify.">
+    <meta property="og:image" content="https://i.pinimg.com/736x/88/c3/38/88c3383a595952f144f80879e19d7d3d.jpg">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="sinaye1337">
+    <meta name="twitter:description" content="Personal bio site of Sinaye: contacts, Discord and Spotify.">
+    <meta name="twitter:image" content="https://i.pinimg.com/736x/88/c3/38/88c3383a595952f144f80879e19d7d3d.jpg">
+    <link rel="icon" type="image/jpeg" href="https://i.pinimg.com/736x/88/c3/38/88c3383a595952f144f80879e19d7d3d.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="snowCanvas" aria-hidden="true"></canvas>
+    <button type="button" id="snowToggleButton" class="snow-toggle-btn" aria-label="Turn off snow" aria-pressed="true">
+        <i id="snowToggleIcon" class="fa-solid fa-snowflake" aria-hidden="true"></i>
+    </button>
+
+    <div class="main-wrapper">
+        <main class="glass-panel">
+            <header class="profile-header">
+                <div id="mainAvatarShell" class="avatar-container skeleton skeleton-circle">
+                    <img id="main-avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23141a22'/><stop offset='1' stop-color='%23242d3b'/></linearGradient></defs><rect width='120' height='120' rx='60' fill='url(%23g)'/><text x='50%25' y='56%25' text-anchor='middle' fill='%23f5f7ff' font-family='Arial' font-size='48' font-weight='700'>S</text></svg>" alt="Sinaye avatar" loading="eager" decoding="async">
+                </div>
+                <div class="identity">
+                    <h1 class="nickname">Sinaye <i class="fa-solid fa-cross verified" aria-hidden="true"></i></h1>
+                    <div id="discord-status-text" class="status-text" aria-live="polite">Offline</div>
+                </div>
+                <div class="meta-row">
+                    <div class="meta-tag">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <span>Ulyanovsk, RU</span>
+                    </div>
+                    <div class="meta-tag">
+                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                        <span id="clock">00:00</span>
+                    </div>
+                </div>
+                <div class="meta-divider" aria-hidden="true"></div>
+            </header>
+
+            <div class="skills-container" aria-label="Skills">
+                <span class="skill-tag">Prompt Engineering</span>
+                <span class="skill-tag">Python Development</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">After Effects</span>
+                <span class="skill-tag">Premiere Pro</span>
+            </div>
+
+            <div class="section-head section-head-spotify" aria-hidden="true">
+                <i class="fa-brands fa-spotify"></i>
+                <span>Spotify Activity</span>
+            </div>
+            <div id="spotify-widget" class="spotify-card spotify-loading" aria-live="polite">
+                <div class="spot-skeleton-row">
+                    <div class="spot-skeleton-cover skeleton"></div>
+                    <div class="spot-skeleton-lines">
+                        <div class="skeleton spot-line-lg"></div>
+                        <div class="skeleton spot-line-sm"></div>
+                    </div>
+                </div>
+                <div class="skeleton spot-bar"></div>
+            </div>
+
+            <div class="section-head section-head-player" aria-hidden="true">
+                <i class="fa-solid fa-sliders"></i>
+                <span>Music Player</span>
+            </div>
+            <section class="music-card" aria-label="Selected track player">
+                <div class="music-top">
+                    <img id="musicCover" class="music-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/72/a7/29/72a7291f-4484-8008-9955-8dc423db52f3/663918401163.jpg/100x100bb.jpg" alt="Track cover" loading="lazy" decoding="async">
+                    <div class="music-meta">
+                        <p class="music-track-name">How Deep Is Your Love</p>
+                        <p class="music-track-artist">HoodTrapJerk, TRPJRK</p>
+                    </div>
+                </div>
+
+                <div class="music-controls">
+                    <button type="button" id="musicToggleButton" class="music-toggle-btn" aria-label="Play or pause track">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                    </button>
+                    <div class="music-volume-wrap">
+                        <button type="button" id="musicMuteButton" class="music-mute-btn" aria-label="Mute music" aria-pressed="false">
+                            <i id="musicVolumeIcon" class="fa-solid fa-volume-high" aria-hidden="true"></i>
+                        </button>
+                        <input id="musicVolume" class="music-volume" type="range" min="0" max="1" step="0.01" value="0.18" aria-label="Music volume">
+                    </div>
+                    <a id="musicOpenLink" class="music-open-link" target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/track/1c1bwU4cCrHi7p0ExosK9T">
+                        Full on Spotify
+                    </a>
+                </div>
+                <audio id="bgMusic" preload="auto" loop></audio>
+            </section>
+
+            <nav class="links-list" aria-label="Social links">
+                <a href="https://t.me/sinaye_o" target="_blank" rel="noopener noreferrer" class="link-card tg" aria-label="Open Telegram in a new tab">
+                    <div class="link-icon"><i class="fa-brands fa-telegram" aria-hidden="true"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">Telegram</span>
+                        <span class="link-sub">My Channel</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://www.youtube.com/@s1nayeshorts" target="_blank" rel="noopener noreferrer" class="link-card yt" aria-label="Open YouTube in a new tab">
+                    <div class="link-icon"><i class="fa-brands fa-youtube" aria-hidden="true"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">YouTube</span>
+                        <span class="link-sub">Watch Content</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow" aria-hidden="true"></i>
+                </a>
+
+                <button type="button" id="discordOpenButton" class="link-card dc" aria-controls="discordModal" aria-expanded="false" aria-label="Open Discord card">
+                    <div class="link-icon"><i class="fa-brands fa-discord" aria-hidden="true"></i></div>
+                    <div class="link-info">
+                        <span class="link-title">Discord</span>
+                        <span class="link-sub">Open profile</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right link-arrow" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </main>
+    </div>
+
+    <div id="musicPrompt" class="choice-overlay" aria-hidden="true">
+        <div class="choice-card" role="dialog" aria-modal="true" aria-labelledby="musicPromptTitle">
+            <h2 id="musicPromptTitle">Enable music?</h2>
+            <p>Play this track from the beginning?</p>
+            <div class="choice-actions">
+                <button type="button" id="musicPromptYes" class="choice-btn choice-btn-yes">Yes</button>
+                <button type="button" id="musicPromptNo" class="choice-btn choice-btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="discordModal" class="modal-overlay" aria-hidden="true">
+        <div class="discord-card" role="dialog" aria-modal="true" aria-labelledby="dc-username">
+            <div class="dc-banner"></div>
+            <div class="dc-content">
+                <div class="dc-header-row">
+                    <div class="dc-avatar-wrapper">
+                        <img id="dc-avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23141a22'/><stop offset='1' stop-color='%23242d3b'/></linearGradient></defs><rect width='120' height='120' rx='60' fill='url(%23g)'/><text x='50%25' y='56%25' text-anchor='middle' fill='%23f5f7ff' font-family='Arial' font-size='48' font-weight='700'>S</text></svg>" alt="Discord avatar" loading="lazy" decoding="async">
+                        <div id="dc-status" class="dc-status" aria-hidden="true"></div>
+                    </div>
+                    <a href="https://discordapp.com/users/950633437000241175" target="_blank" rel="noopener noreferrer" class="dc-btn-profile">Open App</a>
+                </div>
+                <div class="dc-user-info">
+                    <h2 id="dc-username">Sinaye</h2>
+                    <p id="dc-tag" tabindex="0" role="button" aria-label="Copy Discord username">sinaye</p>
+                </div>
+                <div class="dc-divider"></div>
+                <div class="dc-rpc-section">
+                    <h3>DISCORD ACTIVITY</h3>
+                    <div id="rpc-content" class="rpc-box rpc-loading" aria-live="polite">
+                        <div class="skeleton rpc-thumb"></div>
+                        <div class="rpc-lines">
+                            <div class="skeleton rpc-line-lg"></div>
+                            <div class="skeleton rpc-line-sm"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="discordCloseButton" class="dc-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script src="script.js"></script>
+</body>
+</html>
