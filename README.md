@@ -1,5 +1,5 @@
 # 🖤 This is my bio-site..
 
 Suup 
-pls check out this site.
+pls check out this site
 ---
